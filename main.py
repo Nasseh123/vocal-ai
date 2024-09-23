@@ -94,7 +94,7 @@ async def get_message(message: Message,db: Session = Depends(get_db)):
     user_message = message.message
     ai_response = await generate_gpt_response(user_message)
 
-    conversation = Conversation(iuser=user_message, bot_reply=ai_response)
+    conversation = Conversation(user=user_message, bot=ai_response)
     db.add(conversation)
     db.commit()
     db.refresh(conversation)
